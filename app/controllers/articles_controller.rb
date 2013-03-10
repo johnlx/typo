@@ -146,6 +146,18 @@ class ArticlesController < ContentController
     render :text => TextFilter.find(params[:id]).commenthelp
   end
 
+  def merge
+    @article = Article.find(params[:article][:id])
+    @article.merge_with(params[:merge_with])
+#    @other_article = Article.find(params[:merge_with])
+  if @article.save
+    redirect_to :action => 'index'
+  else
+    redirect_to :action => "admin/content/edit/#{@article.id}"
+  end
+    
+  end
+
   private
 
   def verify_config

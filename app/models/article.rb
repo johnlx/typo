@@ -416,6 +416,23 @@ class Article < Content
     user.admin? || user_id == user.id
   end
 
+  def merge_with(another_article_id)
+    other_article = Article.find_by_id(another_article_id)
+ #   puts "Main Article body: #{body}"
+ #   puts "Other article body: #{other_article.body}"
+    self.body += "\n#{other_article.body}"
+    merge_comments(other_article)
+    other_article.destroy
+  end
+
+  def merge_comments(other_article)
+    other_article.comments.each do |comment|
+      self.comments << Comment.new({ :body =>comment.body, :author =>comment.author, :email => comment.email, :url =>comment.url})
+    end
+  end
+
+
+
   protected
 
   def set_published_at

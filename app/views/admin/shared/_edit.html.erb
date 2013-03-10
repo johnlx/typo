@@ -4,3 +4,15 @@
   <%= render :partial => "form" %>
 
 <% end %>
+
+ <% if current_user.admin? %>
+  <%= form_tag(:controller => 'admin/content', :action=>'merge') do %>
+  <div class=''>
+    <h4><%= "Merge Articles" %></h4>
+      <%= label_tag('Article ID') %>
+      <%= text_field_tag(:merge_with) %>
+      <%= hidden_field_tag "orig_id", "#{form_action[:id]}" %>
+      <%= submit_tag "Merge" %>
+  </div>
+  <% end %>
+  <% end %>

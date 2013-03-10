@@ -17,6 +17,9 @@ module NavigationHelpers
       '/'
     when /^the new article page$/
       '/admin/content/new'
+    when /^the edit_article page for "(.*)"/
+      "/admin/content/edit/#{Article.find_by_title($1).id}"
+      #:controller => 'admin/content', :action => 'edit', :id => Article.find_by_title($1).id
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
