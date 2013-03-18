@@ -19,6 +19,8 @@ module NavigationHelpers
       '/admin/content/new'
     when /^the edit_article page for "(.*)"/
       "/admin/content/edit/#{Article.find_by_title($1).id}"
+    when /^the new category page$/
+      '/admin/categories/new'
       #:controller => 'admin/content', :action => 'edit', :id => Article.find_by_title($1).id
 
     # Add more mappings here.
